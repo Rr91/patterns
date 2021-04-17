@@ -4,7 +4,7 @@ class Cache():
 	__create_key = object()
 	def __init__(self, create_key):
 		assert(create_key == Cache.__create_key), \
-            "OnlyCreatable objects must be created using Cache.create"
+            "Cache objects must be created using Cache.create"
 		self.current = 0
 	
 	@staticmethod
