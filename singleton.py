@@ -5,19 +5,19 @@ class Cache():
 	def __init__(self, create_key):
 		assert(create_key == Cache.__create_key), \
             "OnlyCreatable objects must be created using Cache.create"
-		self.current = 1
-		self.cachepath = '{}.txt'.format(self.current)
+		self.current = 0
 	
 	@staticmethod
 	def instance(self):
 		return Cache(Cache.__create_key)
 
 	def addCache(self, data):
-		file_action = FileAction(self.cachepath)
+		self.current += 1
+		file_action = FileAction('{}.txt'.format(self.current))
 		file_action.write(data)
 
 	def getCache(self):
-		file_action = FileAction(self.cachepath)
+		file_action = FileAction('{}.txt'.format(self.current))
 		return file_action.read()
 
 
@@ -34,6 +34,7 @@ class FileAction():
 			return filedata.read()
 
 if __name__ == "__main__":
-	cache = Cache.instance(1)
+	cache = Cache.instance(0)
 	print(cache.addCache(5555))
+	print(cache.addCache(666))
 	print(cache.getCache())
